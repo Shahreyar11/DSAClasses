@@ -1,0 +1,11 @@
+If we run a program where we mention boolean or a bool x;
+
+where bool x can be either 0 or 1 right, as false or true respectively.
+
+but if we run bool x = 10; or any number other than 0 it stills take it as 1
+
+as C++ see anything other than 0 is true
+
+
+INT_MIN is - infinity or -32768 and
+INT_MAX is + infinity 32768
