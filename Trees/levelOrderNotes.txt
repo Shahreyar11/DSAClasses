@@ -1,0 +1,181 @@
+Good question — this confusion is **very common** when learning level-order traversal (BFS). Let’s break it cleanly.
+
+---
+
+### 🔑 First understand ONE thing clearly:
+
+This code uses a **queue (FIFO)** → *First In First Out*
+
+So nodes are processed **level by level, left to right**
+
+---
+
+### 📌 Your Tree:
+
+```
+        1
+      /   \
+     2     3
+    / \     \
+   4   5     7
+```
+
+---
+
+## 🔄 Step-by-step execution (THIS is what you're missing)
+
+### Step 1:
+
+Queue: `[1]`
+
+Pop `1`, push:
+
+```
+2 and 3
+```
+
+Queue becomes:
+
+```
+[2, 3]
+```
+
+---
+
+### Step 2:
+
+Pop `2`, push:
+
+```
+4 and 5
+```
+
+Queue becomes:
+
+```
+[3, 4, 5]
+```
+
+👉 **IMPORTANT:**
+3 is still in queue from earlier! We didn’t lose it.
+
+---
+
+### Step 3:
+
+Pop `3`, push:
+
+```
+NULL (left), 7 (right)
+```
+
+Queue becomes:
+
+```
+[4, 5, NULL, 7]
+```
+
+💥 THIS answers your doubt:
+
+> “how will 7 be pushed?”
+
+👉 Because **3 was already sitting in queue**, waiting its turn.
+
+---
+
+### Step 4:
+
+Pop `4`, push:
+
+```
+NULL, NULL
+```
+
+Queue:
+
+```
+[5, NULL, 7, NULL, NULL]
+```
+
+---
+
+### Step 5:
+
+Pop `5`, push:
+
+```
+NULL, NULL
+```
+
+Queue:
+
+```
+[NULL, 7, NULL, NULL, NULL, NULL]
+```
+
+---
+
+### Step 6:
+
+Pop `NULL`
+
+```
+nullFound = true
+```
+
+---
+
+### Step 7:
+
+Pop `7`
+
+🚨 Now problem happens:
+
+```
+nullFound == true AND node != NULL
+→ return false
+```
+
+---
+
+## 🧠 Core Idea (VERY IMPORTANT)
+
+Once you see a `NULL`,
+👉 all nodes after that must also be `NULL`
+👉 otherwise tree is NOT complete
+
+---
+
+## 💥 Why your confusion happened
+
+You thought:
+
+> "we pushed 4 and 5, so how will 7 come?"
+
+👉 Because queue works like a line:
+
+```
+[2, 3] → process 2 → then process 3
+```
+
+Nodes don’t disappear — they wait.
+
+---
+
+## 🧩 Mental Model (Best way to think)
+
+Think of queue like:
+
+> 🧍‍♂️🧍‍♂️🧍‍♂️ standing in a line
+
+* 2 goes
+* then 3 goes
+* then its children (7) come
+
+---
+
+## 🔥 One-line summary
+
+👉 **Every node gets its turn because queue preserves order.**
+
+---

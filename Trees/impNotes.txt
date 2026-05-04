@@ -1,0 +1,228 @@
+This is *the* core doubt about recursion — and honestly, once this clicks, everything (trees, DP, backtracking) becomes 10× easier.
+
+Let’s clear it **very cleanly and logically**.
+
+---
+
+# 🧠 First: Your confusion in one line
+
+> “Function runs many times, but return happens only once… WHY?”
+
+👉 Reality:
+**Return actually happens MANY times — not once.**
+You’re just seeing only the **final return**.
+
+---
+
+# 📦 Think of recursion like stacked function calls
+
+Every time you call a function, it gets its own **separate box (memory frame)**.
+
+👉 Like stacking plates:
+
+```
+height(1)
+ └── height(2)
+      └── height(4)
+           └── height(NULL)
+```
+
+Each call is waiting for the one below it to finish.
+
+---
+
+# 🔥 Important Rule
+
+👉 A function **pauses** when it calls another function
+👉 It continues only when that call **returns a value**
+
+---
+
+# 🪜 Step-by-step (your tree example)
+
+```cpp
+height(1)
+```
+
+It says:
+👉 “I need height(left) and height(right) first”
+
+So it calls:
+
+```
+height(2)
+```
+
+---
+
+### Then:
+
+```
+height(2)
+```
+
+👉 “I need height(4)”
+
+calls:
+
+```
+height(4)
+```
+
+---
+
+### Then:
+
+```
+height(4)
+```
+
+👉 Calls:
+
+```
+height(NULL)
+```
+
+---
+
+# ⚡ Base case reached
+
+```cpp
+if (root == NULL) return -1;
+```
+
+👉 Now first **return happens here**
+
+---
+
+# 🔄 Now BACKTRACKING starts
+
+This is the part you're missing.
+
+---
+
+### Step 1: return to height(4)
+
+```
+height(NULL) → -1
+height(NULL) → -1
+```
+
+So:
+
+```
+height(4) = 1 + max(-1, -1) = 0
+```
+
+👉 **Return happens here again**
+
+---
+
+### Step 2: return to height(2)
+
+```
+height(4) = 0
+height(NULL) = -1
+```
+
+So:
+
+```
+height(2) = 1 + max(0, -1) = 1
+```
+
+👉 **Return again**
+
+---
+
+### Step 3: return to height(1)
+
+```
+height(2) = 1
+height(3) = 0
+```
+
+So:
+
+```
+height(1) = 2
+```
+
+👉 **Final return**
+
+---
+
+# 🎯 So what's actually happening?
+
+👉 Returns happen at **EVERY level**
+
+But:
+
+* Inner calls return first
+* Outer calls use those results
+* Finally root returns the final answer
+
+---
+
+# 🧠 Why it doesn't break code flow?
+
+Because of **call stack (VERY IMPORTANT)**
+
+Think:
+
+👉 Each function says:
+
+> “I won’t finish until my child finishes”
+
+So execution becomes:
+
+```
+Go DOWN (calls)
+Then come UP (returns)
+```
+
+---
+
+# 📉 Visual Flow
+
+```
+CALLS (going down)
+height(1)
+height(2)
+height(4)
+height(NULL)
+
+RETURNS (coming up)
+-1 → 0 → 1 → 2
+```
+
+---
+
+# 💥 One-line truth
+
+👉 **Recursion = Go deep first, then resolve while coming back**
+
+---
+
+# ⚡ Super simple analogy
+
+Think of asking a chain of people:
+
+* You ask A → A asks B → B asks C
+* C knows answer → tells B
+* B processes → tells A
+* A gives final answer
+
+👉 Everyone returns something — not just one
+
+---
+
+# 🚨 Biggest misconception (you had)
+
+> “It returns only once”
+
+❌ Wrong
+✔ It returns **at every function call**, just in reverse order
+
+---
+
