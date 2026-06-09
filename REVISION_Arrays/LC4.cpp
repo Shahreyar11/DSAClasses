@@ -1,5 +1,6 @@
 // I did the brute force approach the memory limit exceeded
-
+#include<bits/stdc++.h>
+using namespace std;
 class Solution {
 public:
     vector<int> res;
