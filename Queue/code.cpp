@@ -70,3 +70,11 @@ int main(){
     return 0;
 
 }
+
+// The Complete std::queue Toolset
+// q.push(): Adds an element to the back of the queue.
+// q.pop(): Removes the element from the front of the queue.
+// q.front(): Looks at the oldest element (at the front).
+// q.back(): Looks at the newest element (at the back).
+// q.empty(): Returns true if the queue has no elements.
+// q.size(): Returns the total number of elements currently in the queue.
