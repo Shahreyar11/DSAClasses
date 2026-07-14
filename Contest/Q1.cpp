@@ -14,4 +14,33 @@ public:
         }
         return res;
     }
-};©leetcode
+};
+
+
+class Solution {
+public:
+    int minimumCost(vector<int>& nums, int k) {
+        int curr_ava = k;
+        int count_op = 0;
+        int ans = 0;
+        int mod = 1000000007;
+
+        for (int i = 0; i < nums.size(); i++) {
+            if (curr_ava < nums[i]) {
+                curr_ava += k;
+                count_op++;
+                i--;
+            }
+            else {
+                curr_ava -= nums[i];
+            }
+        }
+
+        while (count_op != 0) {
+            ans = (ans + count_op) % mod;   // just mod it with mod thats all we have to do 
+            count_op--;
+        }
+
+        return ans;
+    }
+};
