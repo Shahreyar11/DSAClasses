@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 class Solution {
 public:
     vector<int> x = {-1, 1, 0, 0};
@@ -12,9 +13,10 @@ public:
     int orangesRotting(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
+        int minutes = 0;
 
         queue<pair<int,int>> q;
-        int fresh = 0
+        int fresh = 0;
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
                 if(grid[i][j] == 2)
@@ -24,7 +26,6 @@ public:
             }
         }
 
-        int minutes = 0;
 
         while(!q.empty() && fresh > 0){
             int sz = q.size();
