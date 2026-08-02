@@ -15,7 +15,7 @@ public:
                 else
                     odd++;
 
-                if (odd > 0 && 1LL * even * b <= 1LL * odd * a)
+                if (odd > 0 && 1LL * even * b <= 1LL * odd * a)  // 1LL is nothing but writing long long in short
                     ans++;
             }
         }
